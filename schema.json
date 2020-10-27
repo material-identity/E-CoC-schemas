@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/s1seven/schemas//v1.0.3/e-CoC.schema.json",
+  "$id": "https://schemas.en10204.io/E-CoC-schemas/v0.0.2-0/schema.json",
   "type": "object",
   "title": "eCoC",
   "description": "electronicCertificateOfConformity",

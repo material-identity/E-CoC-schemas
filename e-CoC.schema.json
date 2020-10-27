@@ -1,0 +1,698 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/s1seven/schemas//v1.0.3/e-CoC.schema.json",
+  "type": "object",
+  "title": "eCoC",
+  "description": "electronicCertificateOfConformity",
+  "additionalProperties": false,
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "Issuer's Identifier"
+    },
+    "Uuid": {
+      "type": "string",
+      "description": "UUID according RFC4122 for unique company independent COC reference"
+    },
+    "URL": {
+      "type": "string",
+      "description": "URL for future usage (e.g Download-Link) or Link to public WebService"
+    },
+    "RefSchemaUrl": {
+      "type": "string",
+      "description": "Url-link to schema the json is based upon - same value as $id of schema"
+    },
+    "EcocData": {
+      "$ref": "#/definitions/DataLevel"
+    },
+    "EcocDataOld": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/DataLevelA"
+        },
+        {
+          "$ref": "#/definitions/DataLevelB"
+        },
+        {
+          "$ref": "#/definitions/DataLevelC"
+        }
+      ],
+      "discriminator": {
+        "propertyName": "DataLevel"
+      }
+    },
+    "Declaration": {
+      "type": "object",
+      "properties": {
+        "DateOfIssue": {
+          "type": "string"
+        },
+        "Concessions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "remarks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ConformityStatus": {
+          "type": "string",
+          "enum": [
+            "True",
+            "False",
+            "WithConcessions"
+          ]
+        },
+        "Signature": {
+          "type": "object",
+          "properties": {
+            "SignerName": {
+              "type": "string"
+            },
+            "SignerPosition": {
+              "type": "string"
+            },
+            "PartyRefOfSigner": {
+              "type": "string"
+            },
+            "SignatureStamp": {
+              "type": "string"
+            },
+            "SignatureDate": {
+              "type": "string"
+            }
+          },
+          "required": []
+        },
+        "CocConfirmationText": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": []
+    },
+    "Attachment": {
+      "$ref": "#/definitions/Attachment"
+    }
+  },
+  "required": [],
+  "definitions": {
+    "Party": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "PartyNo": {
+          "type": "integer",
+          "description": "For ease of reference in object of declaration"
+        },
+        "PartyName": {
+          "type": "string"
+        },
+        "PartyIdentifier": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/CompanyIdentifier"
+          }
+        },
+        "PartyAddress": {
+          "$ref": "#/definitions/Address"
+        },
+        "PartyRole": {
+          "$ref": "#/definitions/PartyRole"
+        },
+        "AdditionalPartyProperties": {
+          "$ref": "#/definitions/AddProperties"
+        }
+      },
+      "required": [
+        "PartyName",
+        "PartyAddress"
+      ]
+    },
+    "CompanyIdentifier": {
+      "type": "object",
+      "description": "unique id for identifying party",
+      "additionalProperties": false,
+      "properties": {
+        "NameOfIdentifier": {
+          "type": "string",
+          "enum": [
+            "DUNS",
+            "VATID",
+            "CageCode",
+            "CustomerNo",
+            "SupplierNo"
+          ]
+        },
+        "ValueOfIdentifier": {
+          "type": "string"
+        }
+      }
+    },
+    "Address": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "StreetAddress": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "State": {
+          "type": "string"
+        },
+        "PostalCode": {
+          "type": "string"
+        },
+        "CountryCode": {
+          "type": "string",
+          "$comment": "countryCode nach ISO3166-1"
+        },
+        "AddAddressLine": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "StreetAddress",
+        "City",
+        "PostalCode",
+        "CountryCode"
+      ]
+    },
+    "Attachment": {
+      "type": "object",
+      "properties": {
+        "FileName": {
+          "type": "string"
+        },
+        "FileType": {
+          "type": "string",
+          "description": "MimeType according to IETF's RFC 6838."
+        },
+        "Encoding": {
+          "type": "string",
+          "enum": [
+            "base64"
+          ]
+        },
+        "Data": {
+          "type": "string",
+          "description": "File content encoded according RFC 2548 - Base64"
+        },
+        "HashAlgorithm": {
+          "type": "string",
+          "description": "chacksum/Hash algorithm",
+          "enum": [
+            "SHA1",
+            "MD5"
+          ]
+        },
+        "HashValue": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "PartyRole": {
+      "type": "string",
+      "enum": [
+        "Certifier",
+        "Customer",
+        "InspectionParty",
+        "Manufacturer",
+        "Processor",
+        "Recipient",
+        "Requester",
+        "Supplier",
+        "TestLab"
+      ]
+    },
+    "Object": {
+      "type": "object",
+      "description": "Defines a single part, process,...",
+      "additionalProperties": false,
+      "properties": {
+        "ObjectId": {
+          "type": "string",
+          "description": "unique id for further reference purposes"
+        },
+        "ObjectName": {
+          "type": "string"
+        },
+        "ObjectType": {
+          "type": "string",
+          "description": "Either Material, Part, Assembly, Test,..",
+          "enum": [
+            "Assembly",
+            "ExternalProcess",
+            "InternalProcess",
+            "Material",
+            "MaterialTest",
+            "Part",
+            "RelatedPart",
+            "StandardPart",
+            "Other"
+          ]
+        },
+        "Quantities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Quantity"
+          }
+        },
+        "Dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          }
+        },
+        "NormativeRef": {
+          "$ref": "#/definitions/NormativeRef"
+        },
+        "SerialNr": {
+          "$ref": "#/definitions/SnStructure"
+        },
+        "RefCoC": {
+          "type": "object",
+          "description": "UUID of CoC valid for this object",
+          "additionalProperties": false,
+          "properties": {
+            "RefCocId": {
+              "type": "string"
+            },
+            "RefUrl": {
+              "type": "string",
+              "description": "Url to referenced Document (e.g. for Download)"
+            },
+            "SubDocument": {
+              "$ref": "#/definitions/Attachment"
+            }
+          },
+          "required": []
+        },
+        "PartyRefId": {
+          "type": "integer",
+          "declaration": "referenced to party in party-Structure"
+        },
+        "ReferencedObjects": {
+          "type": "array",
+          "description": "reference to ObjectId of related item",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "ObjectProperties": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Name": {
+                "type": "string",
+                "enum": [
+                  "PartNo",
+                  "BatchNo",
+                  "DrawingNo",
+                  "CastNo",
+                  "PackageNo",
+                  "OrderConfPosition",
+                  "Material",
+                  "Form",
+                  "Temper",
+                  "Other"
+                ]
+              },
+              "Value": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": []
+          }
+        },
+        "AdditionalObjectProperties": {
+          "$ref": "#/definitions/TechnicalProperties"
+        }
+      },
+      "required": [],
+      "additionalObjects": {
+        "$ref": "#/definitions/Object"
+      }
+    },
+    "Results": {
+      "type": "object",
+      "properties": {
+        "MaterialCertification": {
+          "$ref": "https://e-coc.org/schema/v1.0.0/MaterialCertification.json#/definitions/MaterialTest"
+        },
+        "ChemicalAnalysis": {
+          "$ref": "https://raw.githubusercontent.com/s1seven/schemas/main/ChemicalAnalysis.schema.json#/definitions/ChemicalAnalysis"
+        }
+      },
+      "required": []
+    },
+    "Reference": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "Name of business case reference",
+          "enum": [
+            "OrderNo",
+            "OrderPosition",
+            "DeliveryNote",
+            "OrderDate",
+            "CustomerOrderNo",
+            "DeliveryDate"
+          ]
+        },
+        "Value": {
+          "type": "string",
+          "description": "Value of business case reference"
+        }
+      }
+    },
+    "NormativeRef": {
+      "type": "array",
+      "description": "List of applicable standards",
+      "items": {
+        "type": "string"
+      }
+    },
+    "AddProperties": {
+      "type": "array",
+      "description": "Additional Properties Name/ValueArray not covered by standard references",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Value": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": []
+      }
+    },
+    "SnStructure": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "FinishedCustSn": {
+            "type": "string"
+          },
+          "FinishedProdSn": {
+            "type": "string"
+          },
+          "MaterialSupplierSn": {
+            "type": "string"
+          },
+          "MaterialProdSn": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TechnicalProperties": {
+      "type": "array",
+      "description": "Typically technical Properties Name/ValueArray not covered by standard references",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "maxItems": 2,
+                "minItems": 1,
+                "items": {
+                  "type": "number"
+                }
+              },
+              {
+                "type": "array",
+                "maxItems": 6,
+                "minItems": 1,
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "Unit": {
+            "type": "string",
+            "description": "To be defined - this should be physical metric units which are typical in materials science, enum will be long"
+          },
+          "ValueType": {
+            "type": "string",
+            "description": "ValueType may be used by applications for further processing, validations",
+            "enum": [
+              "Integer",
+              "Float",
+              "Time",
+              "DateRange",
+              "NumberRange",
+              "TimeRange",
+              "String"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    "Quantity": {
+      "type": "object",
+      "properties": {
+        "Amount": {
+          "type": "number"
+        },
+        "Unit": {
+          "type": "string",
+          "description": "Abbreviation of Unit according to https://www.doa.la.gov/osp/Vendorcenter/publications/unitofmeasurecodes.pdf"
+        }
+      }
+    },
+    "Dimension": {
+      "type": "object",
+      "properties": {
+        "Direction": {
+          "type": "string",
+          "enume": [
+            "Length",
+            "Width",
+            "Height"
+          ]
+        },
+        "DimValue": {
+          "type": "number"
+        },
+        "DimUnit": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "DataLevel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DataLevel": {
+          "enum": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "Data": {
+          "$ref": "#/definitions/HigherDataLevel"
+        },
+        "Results": {
+          "$ref": "#/definitions/Results"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "DataLevel": {
+                "const": "A"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "Data": {
+                "default": null
+              },
+              "Results": {
+                "default": null
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "DataLevel": {
+                "const": "B"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "Data": {
+                "$ref": "#/definitions/HigherDataLevel"
+              },
+              "Results": {
+                "default": null
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "DataLevel": {
+                "const": "C"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "Data": {
+                "$ref": "#/definitions/HigherDataLevel"
+              },
+              "Results": {
+                "$ref": "#/definitions/Results"
+              }
+            }
+          }
+        }
+      ],
+      "required": [
+        "DataLevel"
+      ]
+    },
+    "DataLevelA": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DataLevel": {
+          "type": "string",
+          "const": "A"
+        }
+      },
+      "required": []
+    },
+    "DataLevelB": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DataLevel": {
+          "type": "string",
+          "const": "B"
+        },
+        "Data": {
+          "$ref": "#/definitions/HigherDataLevel"
+        }
+      },
+      "required": []
+    },
+    "DataLevelC": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DataLevel": {
+          "type": "string",
+          "const": "C"
+        },
+        "Data": {
+          "$ref": "#/definitions/HigherDataLevel"
+        },
+        "Results": {
+          "$ref": "#/definitions/Results"
+        }
+      },
+      "required": []
+    },
+    "HigherDataLevel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "EcocType": {
+          "type": "string",
+          "description": "Product: CoC acc. ISO17050 | Material: DIN EN 10204 | LabTest: Exchange of Lab-Certificates ",
+          "enum": [
+            "Product",
+            "Process",
+            "MaterialCertificate2.1",
+            "MaterialCertificate2.2",
+            "MaterialCertificate3.1",
+            "MaterialCertificate3.2",
+            "LabTest"
+          ]
+        },
+        "Parties": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Party"
+          },
+          "definition": "Parties and partners envolved in CoC"
+        },
+        "BusinessRef": {
+          "type": "object",
+          "description": "References to Business Case",
+          "additionalProperties": false,
+          "properties": {
+            "StandardReferences": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Reference"
+              }
+            },
+            "AdditionalReferences": {
+              "$ref": "#/definitions/AddProperties"
+            }
+          }
+        },
+        "NormativeRef": {
+          "$ref": "#/definitions/NormativeRef"
+        },
+        "ObjectOfDeclaration": {
+          "type": "array",
+          "description": "Designates the parts/material/latest this document is assigned to",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Object"
+          }
+        }
+      }
+    }
+  }
+}

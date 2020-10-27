@@ -13,7 +13,7 @@ function writeFile(path, data) {
   return promisify(fs.writeFile)(path, data);
 }
 
-const schemaFilePaths = ['e-CoC.schema.json'];
+const schemaFilePaths = ['schema.json'];
 
 async function updateSchemasVersion(version) {
   await Promise.all(

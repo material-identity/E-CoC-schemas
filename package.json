@@ -1,6 +1,6 @@
 {
   "name": "e-coc-schemas",
-  "version": "0.0.2-1",
+  "version": "0.0.2-2",
   "description": "E-CoC JSON schema and dependencies developed by S1Seven",
   "main": "index.js",
   "scripts": {

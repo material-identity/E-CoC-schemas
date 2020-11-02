@@ -1,0 +1,126 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.en10204.io/e-coc-schemas/v0.0.2-0/material-certification.json",
+  "type": "object",
+  "title": "MaterialTest",
+  "additionalProperties": false,
+  "properties": {
+    "RefSchemaUrl": {
+      "type": "string",
+      "description": "Url-link to schema the json is based upon same as $id value of schema"
+    },
+    "MaterialCertification": {
+      "$ref": "#/definitions/MaterialTest"
+    }
+  },
+  "required": [],
+  "definitions": {
+    "MaterialTest": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/TestResult"
+      }
+    },
+    "TestResult": {
+      "type": "object",
+      "properties": {
+        "NameOfTest": {
+          "type": "string"
+        },
+        "TestStandardOrMethod": {
+          "type": "string"
+        },
+        "NumberOfTests": {
+          "type": "integer"
+        },
+        "RefObjectIDs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "SampleNumber": {
+          "type": "string"
+        },
+        "SamplePositionAcrossWidth": {
+          "type": "string"
+        },
+        "SamplePositionAlongLength": {
+          "type": "string"
+        },
+        "SamplePositionThroughThickness": {
+          "type": "string"
+        },
+        "TestOK": {
+          "type": "boolean"
+        },
+        "TestValues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestValues"
+          }
+        },
+        "Document": {
+          "$ref": "#/definitions/Attachment"
+        }
+      },
+      "required": []
+    },
+    "TestValues": {
+      "type": "object",
+      "properties": {
+        "ValueName": {
+          "type": "string"
+        },
+        "Unit": {
+          "type": "string"
+        },
+        "TypeOfValue": {
+          "type": "string"
+        },
+        "SpecMin": {
+          "type": "string"
+        },
+        "SpecMax": {
+          "type": "string"
+        },
+        "ActualFrom": {
+          "type": "string"
+        },
+        "ActualTo": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "Attachment": {
+      "type": "object",
+      "properties": {
+        "FileName": {
+          "type": "string"
+        },
+        "FileType": {
+          "type": "string",
+          "description": "MimeType according to IETF's RFC 6838."
+        },
+        "Encoding": {
+          "type": "string",
+          "enum": ["base64"]
+        },
+        "Data": {
+          "type": "string",
+          "description": "File content encoded according RFC 2548 - Base64"
+        },
+        "HashAlgorithm": {
+          "type": "string",
+          "description": "chacksum/Hash algorithm",
+          "enum": ["SHA1", "MD5"]
+        },
+        "HashValue": {
+          "type": "string"
+        }
+      },
+      "required": []
+    }
+  }
+}

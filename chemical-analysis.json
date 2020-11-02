@@ -1,0 +1,95 @@
+{
+  "meta:license": [
+    "Copyright 2020 S1Seven Gmbh. All rights reserved.",
+    "This file is licensed to you under the Apache License, Version 2.0 (the 'License');",
+    "you may not use this file except in compliance with the License. You may obtain a copy",
+    "of the License at http://www.apache.org/licenses/LICENSE-2.0"
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.en10204.io/e-coc-schemas/v0.0.2-0/chemical-analysis.schema.json",
+  "definitions": {
+    "ChemicalElement": {
+      "type": "object",
+      "description": "The chemical elements of the product.",
+      "properties": {
+        "Symbol": {
+          "description": "The symbol of the element",
+          "type": "string"
+        },
+        "ActualFrom": {
+          "description": "The measured part of the element as absolute number.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "ActualTo": {
+          "description": "The measured part of the element as absolute number.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "Minimum": {
+          "description": "The minimum if defined by the product specification, otherwise the element must not provided.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "Maximum": {
+          "description": "The maximum as defined by the product specification.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "TestMethod": {
+          "description": "The technology (or norm) used, e.g. COM, XRF, OES etc.",
+          "type": "string"
+        }
+      },
+      "required": ["Symbol", "ActualFrom"],
+      "additionalProperties": false
+    },
+    "ChemicalAnalysisSample": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "Heat": {
+          "description": "Heat number of initial melt",
+          "type": "string"
+        },
+        "Sample": {
+          "description": "Sample no. or any type of identification of the sample",
+          "type": "string"
+        },
+        "Location": {
+          "description": "If the sample is taken from a specific area of the test piece, e.g. top or bottom",
+          "type": "string"
+        },
+        "Values": {
+          "description": "Share of element",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ChemicalElement"
+          }
+        },
+        "Standards": {
+          "description": "The standard/norm the test was conducted in accordance to",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["Values"],
+      "additionalProperties": false
+    },
+    "ChemicalAnalysis": {
+      "description": "",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/ChemicalAnalysisSample"
+      }
+    }
+  }
+}

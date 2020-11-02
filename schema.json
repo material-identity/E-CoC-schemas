@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://schemas.en10204.io/E-CoC-schemas/v0.0.2-1/schema.json",
+  "$id": "https://schemas.en10204.io/e-coc-schemas/v0.0.2-1/schema.json",
   "type": "object",
   "title": "eCoC",
   "description": "electronicCertificateOfConformity",
@@ -353,10 +353,10 @@
       "type": "object",
       "properties": {
         "MaterialCertification": {
-          "$ref": "https://schemas.en10204.io/e-coc-schemas/v0.0.2-0/material-certification.json#/definitions/MaterialTest"
+          "$ref": "https://schemas.en10204.io/e-coc-schemas/v0.0.2-1/material-certification.json#/definitions/MaterialTest"
         },
         "ChemicalAnalysis": {
-          "$ref": "https://schemas.en10204.io/e-coc-schemas/v0.0.2-0/chemical-analysis.json#/definitions/ChemicalAnalysis"
+          "$ref": "https://schemas.en10204.io/e-coc-schemas/v0.0.2-1/chemical-analysis.json#/definitions/ChemicalAnalysis"
         }
       },
       "required": []

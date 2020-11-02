@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { promisify } = require('util');
 
-const serverUrl = 'https://schemas.en10204.io/E-CoC-schemas';
+const serverUrl = 'https://schemas.en10204.io/e-coc-schemas';
 const schemaFilePaths = ['schema.json'];
 
 function readFile(path) {
@@ -20,6 +20,8 @@ async function updateSchemasVersion(version) {
       schemaName =
         schemaName === 'schema' ? schemaName : `${schemaName}.schema`;
       schema.$id = `${serverUrl}/${version}/${schemaName}.json`;
+      schema.definitions.Results.properties.MaterialCertification.$ref = `${serverUrl}/${version}/material-certification.json#/definitions/MaterialTest`;
+      schema.definitions.Results.properties.ChemicalAnalysis.$ref = `${serverUrl}/${version}/chemical-analysis.json#/definitions/ChemicalAnalysis`;
       await writeFile(filePath, JSON.stringify(schema, null, 2));
     })
   );

@@ -61,11 +61,7 @@
         },
         "ConformityStatus": {
           "type": "string",
-          "enum": [
-            "True",
-            "False",
-            "WithConcessions"
-          ]
+          "enum": ["True", "False", "WithConcessions"]
         },
         "Signature": {
           "type": "object",
@@ -132,10 +128,7 @@
           "$ref": "#/definitions/AddProperties"
         }
       },
-      "required": [
-        "PartyName",
-        "PartyAddress"
-      ]
+      "required": ["PartyName", "PartyAddress"]
     },
     "CompanyIdentifier": {
       "type": "object",
@@ -144,13 +137,7 @@
       "properties": {
         "NameOfIdentifier": {
           "type": "string",
-          "enum": [
-            "DUNS",
-            "VATID",
-            "CageCode",
-            "CustomerNo",
-            "SupplierNo"
-          ]
+          "enum": ["DUNS", "VATID", "CageCode", "CustomerNo", "SupplierNo"]
         },
         "ValueOfIdentifier": {
           "type": "string"
@@ -181,12 +168,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "StreetAddress",
-        "City",
-        "PostalCode",
-        "CountryCode"
-      ]
+      "required": ["StreetAddress", "City", "PostalCode", "CountryCode"]
     },
     "Attachment": {
       "type": "object",
@@ -200,9 +182,7 @@
         },
         "Encoding": {
           "type": "string",
-          "enum": [
-            "base64"
-          ]
+          "enum": ["base64"]
         },
         "Data": {
           "type": "string",
@@ -211,10 +191,7 @@
         "HashAlgorithm": {
           "type": "string",
           "description": "chacksum/Hash algorithm",
-          "enum": [
-            "SHA1",
-            "MD5"
-          ]
+          "enum": ["SHA1", "MD5"]
         },
         "HashValue": {
           "type": "string"
@@ -367,14 +344,7 @@
         "Name": {
           "type": "string",
           "description": "Name of business case reference",
-          "enum": [
-            "OrderNo",
-            "OrderPosition",
-            "DeliveryNote",
-            "OrderDate",
-            "CustomerOrderNo",
-            "DeliveryDate"
-          ]
+          "enum": ["OrderNo", "OrderPosition", "DeliveryNote", "OrderDate", "CustomerOrderNo", "DeliveryDate"]
         },
         "Value": {
           "type": "string",
@@ -471,15 +441,7 @@
           "ValueType": {
             "type": "string",
             "description": "ValueType may be used by applications for further processing, validations",
-            "enum": [
-              "Integer",
-              "Float",
-              "Time",
-              "DateRange",
-              "NumberRange",
-              "TimeRange",
-              "String"
-            ]
+            "enum": ["Integer", "Float", "Time", "DateRange", "NumberRange", "TimeRange", "String"]
           }
         },
         "required": []
@@ -502,11 +464,7 @@
       "properties": {
         "Direction": {
           "type": "string",
-          "enume": [
-            "Length",
-            "Width",
-            "Height"
-          ]
+          "enume": ["Length", "Width", "Height"]
         },
         "DimValue": {
           "type": "number"
@@ -522,11 +480,7 @@
       "additionalProperties": false,
       "properties": {
         "DataLevel": {
-          "enum": [
-            "A",
-            "B",
-            "C"
-          ]
+          "enum": ["A", "B", "C"]
         },
         "Data": {
           "$ref": "#/definitions/HigherDataLevel"
@@ -594,9 +548,7 @@
           }
         }
       ],
-      "required": [
-        "DataLevel"
-      ]
+      "required": ["DataLevel"]
     },
     "DataLevelA": {
       "type": "object",

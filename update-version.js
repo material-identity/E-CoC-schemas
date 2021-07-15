@@ -2,7 +2,7 @@ const fs = require('fs');
 const { promisify } = require('util');
 
 const serverUrl = 'https://schemas.en10204.io/e-coc-schemas';
-const schemaFilePaths = ['schema.json'];
+const schemaFilePaths = ['schema.json', 'chemical-analysis.json', 'material-certification.json'];
 
 function readFile(path) {
   return promisify(fs.readFile)(path, 'utf8');
@@ -19,8 +19,10 @@ async function updateSchemasVersion(version) {
       let [schemaName] = filePath.split('.');
       schemaName = schemaName === 'schema' ? schemaName : `${schemaName}.schema`;
       schema.$id = `${serverUrl}/${version}/${schemaName}.json`;
-      schema.definitions.Results.properties.MaterialCertification.$ref = `${serverUrl}/${version}/material-certification.json#/definitions/MaterialTest`;
-      schema.definitions.Results.properties.ChemicalAnalysis.$ref = `${serverUrl}/${version}/chemical-analysis.json#/definitions/ChemicalAnalysis`;
+      if (schema.definitions.Results) {
+        schema.definitions.Results.properties.MaterialCertification.$ref = `${serverUrl}/${version}/material-certification.json#/definitions/MaterialTest`;
+        schema.definitions.Results.properties.ChemicalAnalysis.$ref = `${serverUrl}/${version}/chemical-analysis.json#/definitions/ChemicalAnalysis`;
+      }
       await writeFile(filePath, JSON.stringify(schema, null, 2));
     }),
   );

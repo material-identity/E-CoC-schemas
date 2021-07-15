@@ -1,6 +1,7 @@
 ## E-COC-schemas
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fs1seven%2FE-CoC-schemas.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fs1seven%2FE-CoC-schemas?ref=badge_shield)
 
+[![E-CoC Schema CI](https://github.com/s1seven/E-CoC-schemas/actions/workflows/ci.yml/badge.svg)](https://github.com/s1seven/E-CoC-schemas/actions/workflows/ci.yml)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fs1seven%2FE-CoC-schemas.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fs1seven%2FE-CoC-schemas?ref=badge_shield)
 
 The e-CoC.schema.json is a reimplementation of [e-coc.org schema](https://e-coc.org/schema/v1.0.0/e-coc.json).
 This repository contains translations and templates used for HTML / PDF rendering of E-CoC certificates.
@@ -76,6 +77,6 @@ Following changes were applied :
 }
 ```
 
-
 ## License
+
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fs1seven%2FE-CoC-schemas.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fs1seven%2FE-CoC-schemas?ref=badge_large)

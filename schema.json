@@ -23,23 +23,57 @@
       "description": "Url-link to schema the json is based upon - same value as $id of schema"
     },
     "EcocData": {
-      "$ref": "#/definitions/DataLevel"
-    },
-    "EcocDataOld": {
-      "oneOf": [
-        {
-          "$ref": "#/definitions/DataLevelA"
-        },
-        {
-          "$ref": "#/definitions/DataLevelB"
-        },
-        {
-          "$ref": "#/definitions/DataLevelC"
-        }
-      ],
+      "type": "object",
       "discriminator": {
         "propertyName": "DataLevel"
-      }
+      },
+      "required": ["DataLevel"],
+      "properties": {
+        "DataLevel": {
+          "type": "string"
+        }
+      },
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "DataLevel": {
+              "type": "string",
+              "const": "A"
+            }
+          },
+          "required": []
+        },
+        {
+          "type": "object",
+          "properties": {
+            "DataLevel": {
+              "type": "string",
+              "const": "B"
+            },
+            "Data": {
+              "$ref": "#/definitions/HigherDataLevel"
+            }
+          },
+          "required": ["Data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "DataLevel": {
+              "type": "string",
+              "const": "C"
+            },
+            "Data": {
+              "$ref": "#/definitions/HigherDataLevel"
+            },
+            "Results": {
+              "$ref": "#/definitions/Results"
+            }
+          },
+          "required": ["Data", "Results"]
+        }
+      ]
     },
     "Declaration": {
       "type": "object",
@@ -98,7 +132,7 @@
       "$ref": "#/definitions/Attachment"
     }
   },
-  "required": [],
+  "required": ["EcocData", "RefSchemaUrl"],
   "definitions": {
     "Party": {
       "type": "object",
@@ -278,7 +312,7 @@
         },
         "PartyRefId": {
           "type": "integer",
-          "declaration": "referenced to party in party-Structure"
+          "description": "referenced to party in party-Structure"
         },
         "ReferencedObjects": {
           "type": "array",
@@ -319,12 +353,12 @@
         },
         "AdditionalObjectProperties": {
           "$ref": "#/definitions/TechnicalProperties"
+        },
+        "additionalObjects": {
+          "$ref": "#/definitions/Object"
         }
       },
-      "required": [],
-      "additionalObjects": {
-        "$ref": "#/definitions/Object"
-      }
+      "required": []
     },
     "Results": {
       "type": "object",
@@ -464,130 +498,13 @@
       "properties": {
         "Direction": {
           "type": "string",
-          "enume": ["Length", "Width", "Height"]
+          "enum": ["Length", "Width", "Height"]
         },
         "DimValue": {
           "type": "number"
         },
         "DimUnit": {
           "type": "string"
-        }
-      },
-      "required": []
-    },
-    "DataLevel": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "DataLevel": {
-          "enum": ["A", "B", "C"]
-        },
-        "Data": {
-          "$ref": "#/definitions/HigherDataLevel"
-        },
-        "Results": {
-          "$ref": "#/definitions/Results"
-        }
-      },
-      "allOf": [
-        {
-          "if": {
-            "properties": {
-              "DataLevel": {
-                "const": "A"
-              }
-            }
-          },
-          "then": {
-            "properties": {
-              "Data": {
-                "default": null
-              },
-              "Results": {
-                "default": null
-              }
-            }
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "DataLevel": {
-                "const": "B"
-              }
-            }
-          },
-          "then": {
-            "properties": {
-              "Data": {
-                "$ref": "#/definitions/HigherDataLevel"
-              },
-              "Results": {
-                "default": null
-              }
-            }
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "DataLevel": {
-                "const": "C"
-              }
-            }
-          },
-          "then": {
-            "properties": {
-              "Data": {
-                "$ref": "#/definitions/HigherDataLevel"
-              },
-              "Results": {
-                "$ref": "#/definitions/Results"
-              }
-            }
-          }
-        }
-      ],
-      "required": ["DataLevel"]
-    },
-    "DataLevelA": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "DataLevel": {
-          "type": "string",
-          "const": "A"
-        }
-      },
-      "required": []
-    },
-    "DataLevelB": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "DataLevel": {
-          "type": "string",
-          "const": "B"
-        },
-        "Data": {
-          "$ref": "#/definitions/HigherDataLevel"
-        }
-      },
-      "required": []
-    },
-    "DataLevelC": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "DataLevel": {
-          "type": "string",
-          "const": "C"
-        },
-        "Data": {
-          "$ref": "#/definitions/HigherDataLevel"
-        },
-        "Results": {
-          "$ref": "#/definitions/Results"
         }
       },
       "required": []
@@ -615,7 +532,7 @@
           "items": {
             "$ref": "#/definitions/Party"
           },
-          "definition": "Parties and partners envolved in CoC"
+          "description": "Parties and partners envolved in CoC"
         },
         "BusinessRef": {
           "type": "object",

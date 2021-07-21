@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://schemas.en10204.io/e-coc-schemas/v0.0.2-0/material-certification.json",
+  "$id": "https://schemas.en10204.io/e-coc-schemas/v0.0.2-2/material-certification.json",
   "type": "object",
   "title": "MaterialTest",
   "additionalProperties": false,

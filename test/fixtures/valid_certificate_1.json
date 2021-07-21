@@ -10,7 +10,7 @@
       "Parties": [
         {
           "PartyNo": 1,
-          "PartyName": "Steel Trading AG",
+          "PartyName": "Material Trading AG",
           "PartyIdentifier": [
             {
               "NameOfIdentifier": "VATID",
@@ -30,7 +30,7 @@
         },
         {
           "PartyNo": 2,
-          "PartyName": "Steel Mill SE",
+          "PartyName": "Material Manufacturing SE",
           "PartyIdentifier": [
             {
               "NameOfIdentifier": "CageCode",
@@ -86,7 +86,7 @@
       "ObjectOfDeclaration": [
         {
           "ObjectId": "1",
-          "ObjectName": "AMAG TopPlate Gussplatte gefräst",
+          "ObjectName": "Material TopPlate Gussplatte gefräst",
           "ObjectType": "Material",
           "Quantities": [
             {
@@ -150,7 +150,7 @@
         },
         {
           "ObjectId": "2",
-          "ObjectName": "AMAG TopPlate Gussplatte gefräst",
+          "ObjectName": "Material TopPlate Gussplatte gefräst",
           "ObjectType": "Material",
           "Quantities": [
             {
@@ -556,7 +556,7 @@
       "Herstellerland Österreich",
       "The Goods are of Austrian origin",
       "Technical Spec.:",
-      "AMAG TopPlate Gussplatte gefräst, Rev.07, September 2015"
+      "Material TopPlate Gussplatte gefräst, Rev.07, September 2015"
     ],
     "ConformityStatus": "True",
     "Signature": {
@@ -571,7 +571,7 @@
     ]
   },
   "Attachment": {
-    "FileName": "AMAG EN 10204 3.1.pdf",
+    "FileName": "Material EN 10204 3.1.pdf",
     "FileType": "application/pdf",
     "Encoding": "base64",
     "Data": "JVBERi0xLjQNCiWio4+TDQozIDAgb2JqDQo8PC9UeXBlIC9YT2JqZWN0IC9TdWJ0eXBlIC9JbWFnZSAvV2lkdGggMTQyMCAvSGVpZ2h0IDQ1MiAvQ29sb3JTcGFjZSAvRGV2aWNlQ01ZSyAvQml0c1BlckNvbXBvbmVudCA4IC9EZWNvZGUgWzEgMCAxIDAgMSAwIDEgMF0gL0ludGVycG9sYXRlIGZhbHNlIC9GaWx0ZXIgL0RDVERlY29kZSAvTGVuZ3RoIDE5MzA3NSA+Pg0Kc3RyZWFtDQr/2P/gABBKRklGAAEBAQEsASwAAP/uAA5BZG9iZQBkAAAAAAD/4QBKRXhpZgAATU0AKgAAAAgAAwEaAAUAAAABAAAAMgEbAAUAAAABAAAAOgEoAAMAAAABAAIAAAAAAAABLAAAAAEAAAEsAAAAAQAA/9sAQwABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAgICAgICAgICAgIDAwMDAwMDAwMD/8AAFAgBxAWMBAERAAIRAAMRAAQRAP/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/aAA4EAQACAAMABAAAPwD+/iv7+K/v4r+/iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiuL+IvxB8J/CnwP4m+IvjrVF0Xwl4R0ubV9c1JoLi6aC1iKRqkNraxzXN1dXM8iRQxRozyyuqqMmsDxT4n0TwX4e1fxV4jvBp+iaHZyX2o3ZjlmMcKFVCxwwpJNNNLI6oiKpZ3YADJrK1vWtN8O6Tf65q9wLXTdNt2ubuco8hSNSAAkcatJJJI7BVVQSzEAVxfxF+IPhP4U+B/E3xF8daoui+EvCOlzavrmpNBcXTQWsRSNUhtbWOa5urq5nkSKGKNGeWV1VRk18J/8AD2H9iT/oo/iD/wAN344/+UdfOP8Aw2p+z3/0Nep/+Et4i/8AldXkP/DRvwo/6Dl7/wCCTVv/AJEr4T/4ew/sSf8ARR/EH/hu/HH/AMo6P+HsP7En/RR/EH/hu/HH/wAo6P8AhtT9nv8A6GvU/wDwlvEX/wArqP8Aho34Uf8AQcvf/BJq3/yJR/w9h/Yk/wCij+IP/Dd+OP8A5R0f8PYf2JP+ij+IP/Dd+OP/AJR0f8Nqfs9/9DXqf/hLeIv/AJXUf8NG/Cj/AKDl7/4JNW/+RKP+HsP7En/RR/EH/hu/HH/yjo/4ew/sSf8ARR/EH/hu/HH/AMo6P+G1P2e/+hr1P/wlvEX/AMrqP+GjfhR/0HL3/wAEmrf/ACJR/wAPYf2JP+ij+IP/AA3fjj/5R0f8PYf2JP8Aoo/iD/w3fjj/AOUdH/Dan7Pf/Q16n/4S3iL/AOV1H/DRvwo/6Dl7/wCCTVv/AJEo/wCHsP7En/RR/EH/AIbvxx/8o6P+HsP7En/RR/EH/hu/HH/yjo/4bU/Z7/6GvU//AAlvEX/yuo/4aN+FH/Qcvf8AwSat/wDIlH/D2H9iT/oo/iD/AMN344/+UdH/AA9h/Yk/6KP4g/8ADd+OP/lHR/w2p+z3/wBDXqf/AIS3iL/5XUf8NG/Cj/oOXv8A4JNW/wDkSj/h7D+xJ/0UfxB/4bvxx/8AKOj/AIew/sSf9FH8Qf8Ahu/HH/yjo/4bU/Z7/wChr1P/AMJbxF/8rqP+GjfhR/0HL3/wSat/8iUf8PYf2JP+ij+IP/Dd+OP/AJR0f8PYf2JP+ij+IP8Aw3fjj/5R0f8ADan7Pf8A0Nep/wDhLeIv/ldR/wANG/Cj/oOXv/gk1b/5Eo/4ew/sSf8ARR/EH/hu/HH/AMo6+wvgj8dfhn+0P4IX4hfCjX28Q+GP7W1DQ5bmawvtKu7XVtMED3dleadqUFte2sywXcMqh0G+KVHGVYGvdPh78RvCPxS8PDxR4K1M6ppH225055ntrmzmhvbQRNNbz2t3FDcQyCOdHG5RuR1YcEV6d4T8X6D420ka14cvDe2H2ma0aRoZreSO5g2GSKWCdI5Y3CSKwyOVYEcGvsL4I/HX4Z/tD+CF",

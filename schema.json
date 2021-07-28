@@ -87,7 +87,7 @@
             "type": "string"
           }
         },
-        "remarks": {
+        "Remarks": {
           "type": "array",
           "items": {
             "type": "string"

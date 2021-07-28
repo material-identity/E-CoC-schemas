@@ -6,7 +6,7 @@
     "of the License at http://www.apache.org/licenses/LICENSE-2.0"
   ],
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://schemas.en10204.io/e-coc-schemas/v0.0.2-2/chemical-analysis.json",
+  "$id": "https://schemas.en10204.io/e-coc-schemas/v0.0.2/chemical-analysis.schema.json",
   "definitions": {
     "ChemicalElement": {
       "type": "object",
@@ -45,7 +45,10 @@
           "type": "string"
         }
       },
-      "required": ["Symbol", "ActualFrom"],
+      "required": [
+        "Symbol",
+        "ActualFrom"
+      ],
       "additionalProperties": false
     },
     "ChemicalAnalysisSample": {
@@ -80,7 +83,9 @@
           }
         }
       },
-      "required": ["Values"],
+      "required": [
+        "Values"
+      ],
       "additionalProperties": false
     },
     "ChemicalAnalysis": {

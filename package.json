@@ -22,7 +22,7 @@
     "release": "read -p 'GITHUB_TOKEN: ' GITHUB_TOKEN && export GITHUB_TOKEN=$GITHUB_TOKEN && release-it"
   },
   "devDependencies": {
-    "@s1seven/schema-tools-utils": "^0.0.18",
+    "@s1seven/schema-tools-utils": "^0.0.19",
     "ajv": "^8.6.0",
     "ajv-formats": "^2.1.0",
     "eslint": "^7.30.0",
@@ -58,5 +58,14 @@
       "after:bump": "npm run update-version v${version} ${name}",
       "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
     }
+  },
+  "jest": {
+    "rootDir": ".",
+    "maxConcurrency": 2,
+    "testRegex": ".*\\.spec\\.js$",
+    "moduleFileExtensions": [
+      "js",
+      "node"
+    ]
   }
 }

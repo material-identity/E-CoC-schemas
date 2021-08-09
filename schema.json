@@ -12,24 +12,25 @@
     },
     "Uuid": {
       "type": "string",
-      "description": "UUID according RFC4122 for unique company independent COC reference"
+      "description": "UUID according RFC4122 for unique company independent COC reference",
+      "format": "uuid"
     },
     "URL": {
       "type": "string",
-      "description": "URL for future usage (e.g Download-Link) or Link to public WebService"
+      "description": "URL for future usage (e.g Download-Link) or Link to public WebService",
+      "format": "uri"
     },
     "RefSchemaUrl": {
       "type": "string",
-      "description": "Url-link to schema the json is based upon - same value as $id of schema"
+      "description": "Url-link to schema the json is based upon - same value as $id of schema",
+      "format": "uri"
     },
     "EcocData": {
       "type": "object",
       "discriminator": {
         "propertyName": "DataLevel"
       },
-      "required": [
-        "DataLevel"
-      ],
+      "required": ["DataLevel"],
       "properties": {
         "DataLevel": {
           "type": "string"
@@ -57,9 +58,7 @@
               "$ref": "#/definitions/HigherDataLevel"
             }
           },
-          "required": [
-            "Data"
-          ]
+          "required": ["Data"]
         },
         {
           "type": "object",
@@ -75,10 +74,7 @@
               "$ref": "#/definitions/Results"
             }
           },
-          "required": [
-            "Data",
-            "Results"
-          ]
+          "required": ["Data", "Results"]
         }
       ]
     },
@@ -90,23 +86,21 @@
         },
         "Concessions": {
           "type": "array",
+          "minItems": 1,
           "items": {
             "type": "string"
           }
         },
         "Remarks": {
           "type": "array",
+          "minItems": 1,
           "items": {
             "type": "string"
           }
         },
         "ConformityStatus": {
           "type": "string",
-          "enum": [
-            "True",
-            "False",
-            "WithConcessions"
-          ]
+          "enum": ["True", "False", "WithConcessions"]
         },
         "Signature": {
           "type": "object",
@@ -118,7 +112,8 @@
               "type": "string"
             },
             "PartyRefOfSigner": {
-              "type": "string"
+              "description": "refer to PartyNo in Party",
+              "type": "integer"
             },
             "SignatureStamp": {
               "type": "string"
@@ -127,7 +122,7 @@
               "type": "string"
             }
           },
-          "required": []
+          "required": ["SignerName", "SignerPosition", "PartyRefOfSigner", "SignatureStamp", "SignatureDate"]
         },
         "CocConfirmationText": {
           "type": "array",
@@ -137,16 +132,13 @@
           }
         }
       },
-      "required": []
+      "required": ["DateOfIssue", "ConformityStatus", "Signature", "CocConfirmationText"]
     },
     "Attachment": {
       "$ref": "#/definitions/Attachment"
     }
   },
-  "required": [
-    "EcocData",
-    "RefSchemaUrl"
-  ],
+  "required": ["EcocData", "RefSchemaUrl", "Uuid"],
   "definitions": {
     "Party": {
       "type": "object",
@@ -176,10 +168,7 @@
           "$ref": "#/definitions/AddProperties"
         }
       },
-      "required": [
-        "PartyName",
-        "PartyAddress"
-      ]
+      "required": ["PartyName", "PartyNo", "PartyAddress", "PartyIdentifier", "PartyRole"]
     },
     "CompanyIdentifier": {
       "type": "object",
@@ -188,18 +177,13 @@
       "properties": {
         "NameOfIdentifier": {
           "type": "string",
-          "enum": [
-            "DUNS",
-            "VATID",
-            "CageCode",
-            "CustomerNo",
-            "SupplierNo"
-          ]
+          "enum": ["DUNS", "VATID", "CageCode", "CustomerNo", "SupplierNo"]
         },
         "ValueOfIdentifier": {
           "type": "string"
         }
-      }
+      },
+      "required": ["NameOfIdentifier", "ValueOfIdentifier"]
     },
     "Address": {
       "type": "object",
@@ -225,12 +209,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "StreetAddress",
-        "City",
-        "PostalCode",
-        "CountryCode"
-      ]
+      "required": ["StreetAddress", "City", "PostalCode", "CountryCode"]
     },
     "Attachment": {
       "type": "object",
@@ -244,9 +223,7 @@
         },
         "Encoding": {
           "type": "string",
-          "enum": [
-            "base64"
-          ]
+          "enum": ["base64"]
         },
         "Data": {
           "type": "string",
@@ -255,16 +232,13 @@
         "HashAlgorithm": {
           "type": "string",
           "description": "chacksum/Hash algorithm",
-          "enum": [
-            "SHA1",
-            "MD5"
-          ]
+          "enum": ["SHA1", "MD5"]
         },
         "HashValue": {
           "type": "string"
         }
       },
-      "required": []
+      "required": ["FileName", "FileType", "Encoding", "Data", "HashAlgorithm", "HashValue"]
     },
     "PartyRole": {
       "type": "string",
@@ -309,6 +283,7 @@
         },
         "Quantities": {
           "type": "array",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/Quantity"
           }
@@ -327,11 +302,13 @@
         },
         "RefCoC": {
           "type": "object",
-          "description": "UUID of CoC valid for this object",
+          "description": "Links and references to underlying E-CoC",
           "additionalProperties": false,
           "properties": {
             "RefCocId": {
-              "type": "string"
+              "description": "UUID of CoC valid for this object",
+              "type": "string",
+              "format": "uuid"
             },
             "RefUrl": {
               "type": "string",
@@ -341,21 +318,23 @@
               "$ref": "#/definitions/Attachment"
             }
           },
-          "required": []
+          "required": ["RefCocId"]
         },
         "PartyRefId": {
           "type": "integer",
-          "description": "referenced to party in party-Structure"
+          "description": "referenced to party in party-Structure, PartyNo from Party object"
         },
         "ReferencedObjects": {
           "type": "array",
           "description": "reference to ObjectId of related item",
+          "minItems": 1,
           "items": {
             "type": "integer"
           }
         },
         "ObjectProperties": {
           "type": "array",
+          "minItems": 1,
           "items": {
             "type": "object",
             "properties": {
@@ -376,12 +355,13 @@
               },
               "Value": {
                 "type": "array",
+                "minItems": 1,
                 "items": {
                   "type": "string"
                 }
               }
             },
-            "required": []
+            "required": ["Name", "Value"]
           }
         },
         "AdditionalObjectProperties": {
@@ -391,7 +371,7 @@
           "$ref": "#/definitions/Object"
         }
       },
-      "required": []
+      "required": ["ObjectId", "ObjectName", "ObjectType", "PartyRefId", "ObjectProperties"]
     },
     "Results": {
       "type": "object",
@@ -411,24 +391,19 @@
         "Name": {
           "type": "string",
           "description": "Name of business case reference",
-          "enum": [
-            "OrderNo",
-            "OrderPosition",
-            "DeliveryNote",
-            "OrderDate",
-            "CustomerOrderNo",
-            "DeliveryDate"
-          ]
+          "enum": ["OrderNo", "OrderPosition", "DeliveryNote", "OrderDate", "CustomerOrderNo", "DeliveryDate"]
         },
         "Value": {
           "type": "string",
           "description": "Value of business case reference"
         }
-      }
+      },
+      "required": ["Name", "Value"]
     },
     "NormativeRef": {
       "type": "array",
       "description": "List of applicable standards",
+      "minItems": 1,
       "items": {
         "type": "string"
       }
@@ -436,6 +411,7 @@
     "AddProperties": {
       "type": "array",
       "description": "Additional Properties Name/ValueArray not covered by standard references",
+      "minItems": 1,
       "items": {
         "type": "object",
         "properties": {
@@ -444,12 +420,13 @@
           },
           "Value": {
             "type": "array",
+            "minItems": 1,
             "items": {
               "type": "string"
             }
           }
         },
-        "required": []
+        "required": ["Name", "Value"]
       }
     },
     "SnStructure": {
@@ -515,15 +492,7 @@
           "ValueType": {
             "type": "string",
             "description": "ValueType may be used by applications for further processing, validations",
-            "enum": [
-              "Integer",
-              "Float",
-              "Time",
-              "DateRange",
-              "NumberRange",
-              "TimeRange",
-              "String"
-            ]
+            "enum": ["Integer", "Float", "Time", "DateRange", "NumberRange", "TimeRange", "String"]
           }
         },
         "required": []
@@ -546,11 +515,7 @@
       "properties": {
         "Direction": {
           "type": "string",
-          "enum": [
-            "Length",
-            "Width",
-            "Height"
-          ]
+          "enum": ["Length", "Width", "Height"]
         },
         "DimValue": {
           "type": "number"
@@ -593,6 +558,7 @@
           "properties": {
             "StandardReferences": {
               "type": "array",
+              "minItems": 1,
               "items": {
                 "$ref": "#/definitions/Reference"
               }
@@ -600,7 +566,8 @@
             "AdditionalReferences": {
               "$ref": "#/definitions/AddProperties"
             }
-          }
+          },
+          "required": ["StandardReferences"]
         },
         "NormativeRef": {
           "$ref": "#/definitions/NormativeRef"
@@ -613,7 +580,8 @@
             "$ref": "#/definitions/Object"
           }
         }
-      }
+      },
+      "required": ["EcocType", "Parties", "BusinessRef", "ObjectOfDeclaration"]
     }
   }
 }

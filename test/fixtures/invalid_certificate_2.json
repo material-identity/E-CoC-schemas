@@ -1,8 +1,7 @@
 {
   "Id": "89172671",
   "Uuid": "c42cf70d-042e-44e6-a918-02e57aa69982",
-  "URL": "",
-  "RefSchemaUrl": "https://schemas.en10204.io/e-coc-schemas/v0.0.2-2/schema.json",
+  "RefSchemaUrl": "https://schemas.en10204.io/e-coc-schemas/v0.0.2/schema.json",
   "EcocData": {
     "DataLevel": "C",
     "Data": {
@@ -18,8 +17,13 @@
             "State": "",
             "AddAddressLine": ""
           },
-          "PartyRole": "Recipient",
-          "AdditionalPartyProperties": []
+          "PartyIdentifier": [
+            {
+              "NameOfIdentifier": "CustomerNo",
+              "ValueOfIdentifier": "120103"
+            }
+          ],
+          "PartyRole": "Recipient"
         },
         {
           "PartyNo": 2,
@@ -81,6 +85,7 @@
           "ObjectId": "1",
           "ObjectName": "Material TopPlate Gussplatte gefräst",
           "ObjectType": "Material",
+          "PartyRefId": 1,
           "Quantities": [
             {
               "Amount": 1096,
@@ -108,7 +113,6 @@
               "DimUnit": "mm"
             }
           ],
-          "NormativeRef": [],
           "ObjectProperties": [
             {
               "Name": "BatchNo",
@@ -145,6 +149,7 @@
           "ObjectId": "2",
           "ObjectName": "Material TopPlate Gussplatte gefräst",
           "ObjectType": "Material",
+          "PartyRefId": 1,
           "Quantities": [
             {
               "Amount": 1093,
@@ -172,7 +177,6 @@
               "DimUnit": "mm"
             }
           ],
-          "NormativeRef": [],
           "ObjectProperties": [
             {
               "Name": "BatchNo",

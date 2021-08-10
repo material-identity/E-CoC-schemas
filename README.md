@@ -77,6 +77,23 @@ Following changes were applied :
 }
 ```
 
+## TODO
+
+- in `Declaration`:
+  if `ConformityStatus` = WithConcessions, `Concessions` should be required
+
+- in `Party`:
+  if `CompanyIdentifier` only allow "DUNS", "VATID", "CageCode", which are absolute identifier
+  and separate "CustomerNo", "SupplierNo" in a new property
+
+- in `ObjectOfDeclaration`:
+  rename `Object` to `ObjectOfDeclarationItem` ?
+
+- in `Results`
+  requires at least oneOf `MaterialCertification` or `ChemicalAnalysis`
+
+Add some descriptions!
+
 ## License
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fs1seven%2FE-CoC-schemas.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fs1seven%2FE-CoC-schemas?ref=badge_large)

@@ -16,7 +16,6 @@ const createAjvInstance = () => {
     discriminator: true,
   });
   ajv.addKeyword('meta:license');
-
   addFormats(ajv);
   return ajv;
 };
@@ -29,10 +28,13 @@ describe('Validate', function () {
   const chemicalAnalysisSchemaPath = resolve(__dirname, '../chemical-analysis.json');
   const chemicalAnalysisSchema = JSON.parse(readFileSync(chemicalAnalysisSchemaPath, 'utf-8'));
   // force using local schemas
-  localSchema.definitions.Results.properties.MaterialCertification.$ref =
-    './material-certification.json#/definitions/MaterialTest';
-  localSchema.definitions.Results.properties.ChemicalAnalysis.$ref =
-    './chemical-analysis.json#/definitions/ChemicalAnalysis';
+  localSchema.definitions = {
+    ...localSchema.definitions,
+    ...materialCertificationSchema.definitions,
+    ...chemicalAnalysisSchema.definitions,
+  };
+  localSchema.definitions.Results.properties.MaterialCertification.$ref = '#/definitions/MaterialTest';
+  localSchema.definitions.Results.properties.ChemicalAnalysis.$ref = '#/definitions/ChemicalAnalysis';
 
   const validCertTestSuitesMap = [
     {
@@ -44,6 +46,15 @@ describe('Validate', function () {
       certificateName: `invalid_certificate_1`,
       expectedErrors: [
         {
+          instancePath: '/URL',
+          keyword: 'format',
+          message: 'must match format "uri"',
+          params: {
+            format: 'uri',
+          },
+          schemaPath: '#/properties/URL/format',
+        },
+        {
           instancePath: '/EcocData',
           keyword: 'required',
           message: "must have required property 'Results'",
@@ -53,6 +64,15 @@ describe('Validate', function () {
           schemaPath: '#/properties/EcocData/oneOf/2/required',
         },
         {
+          instancePath: '/EcocData/Data/Parties/0',
+          keyword: 'required',
+          message: "must have required property 'PartyIdentifier'",
+          params: {
+            missingProperty: 'PartyIdentifier',
+          },
+          schemaPath: '#/required',
+        },
+        {
           instancePath: '/EcocData/Data/Parties/0/PartyAddress',
           keyword: 'required',
           message: "must have required property 'CountryCode'",
@@ -60,6 +80,15 @@ describe('Validate', function () {
             missingProperty: 'CountryCode',
           },
           schemaPath: '#/definitions/Address/required',
+        },
+        {
+          instancePath: '/EcocData/Data/Parties/0/AdditionalPartyProperties',
+          keyword: 'minItems',
+          message: 'must NOT have fewer than 1 items',
+          params: {
+            limit: 1,
+          },
+          schemaPath: '#/definitions/AddProperties/minItems',
         },
         {
           instancePath: '/EcocData/Data/Parties/1/PartyIdentifier/0/NameOfIdentifier',
@@ -88,6 +117,51 @@ describe('Validate', function () {
             ],
           },
           schemaPath: '#/definitions/PartyRole/enum',
+        },
+        {
+          instancePath: '/EcocData/Data/ObjectOfDeclaration/0',
+          keyword: 'required',
+          message: "must have required property 'PartyRefId'",
+          params: {
+            missingProperty: 'PartyRefId',
+          },
+          schemaPath: '#/required',
+        },
+        {
+          instancePath: '/EcocData/Data/ObjectOfDeclaration/0/NormativeRef',
+          keyword: 'minItems',
+          message: 'must NOT have fewer than 1 items',
+          params: {
+            limit: 1,
+          },
+          schemaPath: '#/definitions/NormativeRef/minItems',
+        },
+        {
+          instancePath: '/EcocData/Data/ObjectOfDeclaration/1',
+          keyword: 'required',
+          message: "must have required property 'PartyRefId'",
+          params: {
+            missingProperty: 'PartyRefId',
+          },
+          schemaPath: '#/required',
+        },
+        {
+          instancePath: '/EcocData/Data/ObjectOfDeclaration/1/NormativeRef',
+          keyword: 'minItems',
+          message: 'must NOT have fewer than 1 items',
+          params: {
+            limit: 1,
+          },
+          schemaPath: '#/definitions/NormativeRef/minItems',
+        },
+        {
+          instancePath: '/Declaration/Signature',
+          keyword: 'required',
+          message: "must have required property 'PartyRefOfSigner'",
+          params: {
+            missingProperty: 'PartyRefOfSigner',
+          },
+          schemaPath: '#/properties/Declaration/properties/Signature/required',
         },
       ],
     },
@@ -122,6 +196,15 @@ describe('Validate', function () {
           schemaPath: '#/properties/TestOK/type',
         },
         {
+          instancePath: '/Declaration/Signature',
+          keyword: 'required',
+          message: "must have required property 'PartyRefOfSigner'",
+          params: {
+            missingProperty: 'PartyRefOfSigner',
+          },
+          schemaPath: '#/properties/Declaration/properties/Signature/required',
+        },
+        {
           instancePath: '/Attachment/HashAlgorithm',
           keyword: 'enum',
           message: 'must be equal to one of the allowed values',
@@ -134,12 +217,9 @@ describe('Validate', function () {
     },
   ];
 
-  it('should validate schema', () => {
-    const validateSchema = createAjvInstance()
-      .addSchema(materialCertificationSchema)
-      .addSchema(chemicalAnalysisSchema)
-      .compile(localSchema);
-
+  it('should validate schema', async () => {
+    const ajv = createAjvInstance();
+    const validateSchema = ajv.compile(localSchema);
     expect(() => validateSchema()).not.toThrow();
   });
 
@@ -147,10 +227,7 @@ describe('Validate', function () {
     it(`${certificateName} should be a valid certificate`, async () => {
       const certificatePath = resolve(__dirname, `./fixtures/${certificateName}.json`);
       const certificate = JSON.parse(readFileSync(certificatePath, 'utf8'));
-      const validator = await createAjvInstance()
-        .addSchema(materialCertificationSchema)
-        .addSchema(chemicalAnalysisSchema)
-        .compileAsync(localSchema);
+      const validator = await createAjvInstance().compileAsync(localSchema);
       //
       const isValid = await validator(certificate);
       expect(isValid).toBe(true);
@@ -162,10 +239,7 @@ describe('Validate', function () {
     it(`${certificateName} should be an invalid certificate`, async () => {
       const certificatePath = resolve(__dirname, `./fixtures/${certificateName}.json`);
       const certificate = JSON.parse(readFileSync(certificatePath, 'utf8'));
-      const validator = await createAjvInstance()
-        .addSchema(materialCertificationSchema)
-        .addSchema(chemicalAnalysisSchema)
-        .compileAsync(localSchema);
+      const validator = await createAjvInstance().compileAsync(localSchema);
       //
       const isValid = await validator(certificate);
       expect(isValid).toBe(false);

@@ -45,10 +45,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "Symbol",
-        "ActualFrom"
-      ],
+      "required": ["Symbol", "ActualFrom"],
       "additionalProperties": false
     },
     "ChemicalAnalysisSample": {
@@ -83,9 +80,7 @@
           }
         }
       },
-      "required": [
-        "Values"
-      ],
+      "required": ["Values"],
       "additionalProperties": false
     },
     "ChemicalAnalysis": {

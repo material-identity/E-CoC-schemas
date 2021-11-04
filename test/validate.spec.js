@@ -46,13 +46,13 @@ describe('Validate', function () {
       certificateName: `invalid_certificate_1`,
       expectedErrors: [
         {
-          instancePath: '/URL',
+          instancePath: '/Url',
           keyword: 'format',
           message: 'must match format "uri"',
           params: {
             format: 'uri',
           },
-          schemaPath: '#/properties/URL/format',
+          schemaPath: '#/properties/Url/format',
         },
         {
           instancePath: '/EcocData',

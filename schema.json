@@ -367,7 +367,7 @@
         "AdditionalObjectProperties": {
           "$ref": "#/definitions/TechnicalProperties"
         },
-        "additionalObjects": {
+        "AdditionalObjects": {
           "$ref": "#/definitions/Object"
         }
       },

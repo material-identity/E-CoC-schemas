@@ -15,7 +15,7 @@
       "description": "UUID according RFC4122 for unique company independent COC reference",
       "format": "uuid"
     },
-    "URL": {
+    "Url": {
       "type": "string",
       "description": "URL for future usage (e.g Download-Link) or Link to public WebService",
       "format": "uri"
@@ -367,7 +367,7 @@
         "AdditionalObjectProperties": {
           "$ref": "#/definitions/TechnicalProperties"
         },
-        "additionalObjects": {
+        "AdditionalObjects": {
           "$ref": "#/definitions/Object"
         }
       },

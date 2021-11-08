@@ -1,6 +1,6 @@
 ---
 name: Enhancement Proposal
-about: Create a proposal to enhance the format
+about: Create a proposal to enhance the schema
 title: "[EP]"
 labels: ''
 assignees: ''

@@ -1,8 +1,14 @@
+const { execSync } = require('child_process');
 const fs = require('fs');
+const glob = require('glob');
+const prettier = require('prettier');
 const { promisify } = require('util');
+const { version: pkgVersion } = require('./package.json');
 
-const serverUrl = 'https://schemas.en10204.io/e-coc-schemas';
+const serverUrl = 'https://schemas.s1seven.com/e-coc-schemas';
 const schemaFilePaths = ['schema.json', 'chemical-analysis.json', 'material-certification.json'];
+const fixturesFolder = 'test/fixtures';
+const jsonFixturesPattern = `${fixturesFolder}/*valid_certificate_*.json`;
 
 function readFile(path) {
   return promisify(fs.readFile)(path, 'utf8');
@@ -10,6 +16,25 @@ function readFile(path) {
 
 function writeFile(path, data) {
   return promisify(fs.writeFile)(path, data);
+}
+
+function buildRefSchemaUrl(version, schemaName = 'schema') {
+  return `${serverUrl}/${version}/${schemaName}.json`;
+}
+
+async function updateJsonFixturesVersion(version) {
+  const propertyPath = 'RefSchemaUrl';
+  const filePaths = glob.sync(jsonFixturesPattern);
+  await Promise.all(
+    filePaths.map(async (filePath) => {
+      const file = JSON.parse(await readFile(filePath));
+      const RefSchemaUrl = buildRefSchemaUrl(version);
+      file[propertyPath] = RefSchemaUrl;
+      const prettierOptions = await prettier.resolveConfig(filePath);
+      const json = prettier.format(JSON.stringify(file, null, 2), { ...(prettierOptions || {}), parser: 'json' });
+      await writeFile(filePath, json);
+    }),
+  );
 }
 
 async function updateSchemasVersion(version) {
@@ -28,7 +53,14 @@ async function updateSchemasVersion(version) {
   );
 }
 
+function stageAndCommitChanges(version) {
+  execSync(`git add ${jsonFixturesPattern} ${schemaFilePaths.join(' ')}`);
+  execSync(`git commit -m 'chore: sync versions to ${version}'`);
+}
+
 (async function (argv) {
-  const version = argv[2];
+  const version = argv[2] || pkgVersion;
   await updateSchemasVersion(version);
+  await updateJsonFixturesVersion(version);
+  stageAndCommitChanges(version);
 })(process.argv);

@@ -1,6 +1,6 @@
 {
   "name": "e-coc-schemas",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "E-CoC JSON schema and dependencies developed by S1Seven",
   "repository": {
     "type": "git",
@@ -23,16 +23,17 @@
   },
   "devDependencies": {
     "@s1seven/schema-tools-utils": "^0.0.20",
-    "ajv": "^8.6.0",
+    "ajv": "^8.8.0",
     "ajv-formats": "^2.1.0",
-    "eslint": "^7.30.0",
+    "eslint": "^8.4.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "jest": "^27.0.6",
-    "lint-staged": "^11.0.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "glob": "^7.2.0",
+    "jest": "^27.4.3",
+    "lint-staged": "^12.1.2",
     "pre-commit": "^1.2.2",
-    "prettier": "2.3.2",
-    "release-it": "^14.11.0"
+    "prettier": "2.5.1",
+    "release-it": "*"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [

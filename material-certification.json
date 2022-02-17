@@ -14,7 +14,9 @@
       "$ref": "#/definitions/MaterialTest"
     }
   },
-  "required": ["MaterialCertification"],
+  "required": [
+    "MaterialCertification"
+  ],
   "definitions": {
     "MaterialTest": {
       "type": "array",
@@ -95,7 +97,11 @@
           "type": "string"
         }
       },
-      "required": ["ValueName", "Unit", "ActualFrom"]
+      "required": [
+        "ValueName",
+        "Unit",
+        "ActualFrom"
+      ]
     },
     "Attachment": {
       "type": "object",
@@ -109,7 +115,9 @@
         },
         "Encoding": {
           "type": "string",
-          "enum": ["base64"]
+          "enum": [
+            "base64"
+          ]
         },
         "Data": {
           "type": "string",
@@ -118,13 +126,23 @@
         "HashAlgorithm": {
           "type": "string",
           "description": "chacksum/Hash algorithm",
-          "enum": ["SHA1", "MD5"]
+          "enum": [
+            "SHA1",
+            "MD5"
+          ]
         },
         "HashValue": {
           "type": "string"
         }
       },
-      "required": ["FileName", "FileType", "Encoding", "Data", "HashAlgorithm", "HashValue"]
+      "required": [
+        "FileName",
+        "FileType",
+        "Encoding",
+        "Data",
+        "HashAlgorithm",
+        "HashValue"
+      ]
     }
   }
 }

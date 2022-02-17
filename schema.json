@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://schemas.en10204.io/e-coc-schemas/v1.0.0/schema.json",
+  "$id": "https://schemas.s1seven.com/e-coc-schemas/v1.0.0/schema.json",
   "type": "object",
   "title": "eCoC",
   "description": "electronicCertificateOfConformity",
@@ -30,9 +30,7 @@
       "discriminator": {
         "propertyName": "DataLevel"
       },
-      "required": [
-        "DataLevel"
-      ],
+      "required": ["DataLevel"],
       "properties": {
         "DataLevel": {
           "type": "string"
@@ -60,9 +58,7 @@
               "$ref": "#/definitions/HigherDataLevel"
             }
           },
-          "required": [
-            "Data"
-          ]
+          "required": ["Data"]
         },
         {
           "type": "object",
@@ -78,10 +74,7 @@
               "$ref": "#/definitions/Results"
             }
           },
-          "required": [
-            "Data",
-            "Results"
-          ]
+          "required": ["Data", "Results"]
         }
       ]
     },
@@ -107,11 +100,7 @@
         },
         "ConformityStatus": {
           "type": "string",
-          "enum": [
-            "True",
-            "False",
-            "WithConcessions"
-          ]
+          "enum": ["True", "False", "WithConcessions"]
         },
         "Signature": {
           "type": "object",
@@ -133,13 +122,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "SignerName",
-            "SignerPosition",
-            "PartyRefOfSigner",
-            "SignatureStamp",
-            "SignatureDate"
-          ]
+          "required": ["SignerName", "SignerPosition", "PartyRefOfSigner", "SignatureStamp", "SignatureDate"]
         },
         "CocConfirmationText": {
           "type": "array",
@@ -149,22 +132,13 @@
           }
         }
       },
-      "required": [
-        "DateOfIssue",
-        "ConformityStatus",
-        "Signature",
-        "CocConfirmationText"
-      ]
+      "required": ["DateOfIssue", "ConformityStatus", "Signature", "CocConfirmationText"]
     },
     "Attachment": {
       "$ref": "#/definitions/Attachment"
     }
   },
-  "required": [
-    "EcocData",
-    "RefSchemaUrl",
-    "Uuid"
-  ],
+  "required": ["EcocData", "RefSchemaUrl", "Uuid"],
   "definitions": {
     "Party": {
       "type": "object",
@@ -194,13 +168,7 @@
           "$ref": "#/definitions/AddProperties"
         }
       },
-      "required": [
-        "PartyName",
-        "PartyNo",
-        "PartyAddress",
-        "PartyIdentifier",
-        "PartyRole"
-      ]
+      "required": ["PartyName", "PartyNo", "PartyAddress", "PartyIdentifier", "PartyRole"]
     },
     "CompanyIdentifier": {
       "type": "object",
@@ -209,22 +177,13 @@
       "properties": {
         "NameOfIdentifier": {
           "type": "string",
-          "enum": [
-            "DUNS",
-            "VATID",
-            "CageCode",
-            "CustomerNo",
-            "SupplierNo"
-          ]
+          "enum": ["DUNS", "VATID", "CageCode", "CustomerNo", "SupplierNo"]
         },
         "ValueOfIdentifier": {
           "type": "string"
         }
       },
-      "required": [
-        "NameOfIdentifier",
-        "ValueOfIdentifier"
-      ]
+      "required": ["NameOfIdentifier", "ValueOfIdentifier"]
     },
     "Address": {
       "type": "object",
@@ -250,12 +209,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "StreetAddress",
-        "City",
-        "PostalCode",
-        "CountryCode"
-      ]
+      "required": ["StreetAddress", "City", "PostalCode", "CountryCode"]
     },
     "Attachment": {
       "type": "object",
@@ -269,9 +223,7 @@
         },
         "Encoding": {
           "type": "string",
-          "enum": [
-            "base64"
-          ]
+          "enum": ["base64"]
         },
         "Data": {
           "type": "string",
@@ -280,23 +232,13 @@
         "HashAlgorithm": {
           "type": "string",
           "description": "chacksum/Hash algorithm",
-          "enum": [
-            "SHA1",
-            "MD5"
-          ]
+          "enum": ["SHA1", "MD5"]
         },
         "HashValue": {
           "type": "string"
         }
       },
-      "required": [
-        "FileName",
-        "FileType",
-        "Encoding",
-        "Data",
-        "HashAlgorithm",
-        "HashValue"
-      ]
+      "required": ["FileName", "FileType", "Encoding", "Data", "HashAlgorithm", "HashValue"]
     },
     "PartyRole": {
       "type": "string",
@@ -376,9 +318,7 @@
               "$ref": "#/definitions/Attachment"
             }
           },
-          "required": [
-            "RefCocId"
-          ]
+          "required": ["RefCocId"]
         },
         "PartyRefId": {
           "type": "integer",
@@ -421,35 +361,26 @@
                 }
               }
             },
-            "required": [
-              "Name",
-              "Value"
-            ]
+            "required": ["Name", "Value"]
           }
         },
         "AdditionalObjectProperties": {
           "$ref": "#/definitions/TechnicalProperties"
         },
-        "AdditionalObjects": {
+        "additionalObjects": {
           "$ref": "#/definitions/Object"
         }
       },
-      "required": [
-        "ObjectId",
-        "ObjectName",
-        "ObjectType",
-        "PartyRefId",
-        "ObjectProperties"
-      ]
+      "required": ["ObjectId", "ObjectName", "ObjectType", "PartyRefId", "ObjectProperties"]
     },
     "Results": {
       "type": "object",
       "properties": {
         "MaterialCertification": {
-          "$ref": "https://schemas.en10204.io/e-coc-schemas/v1.0.0/material-certification.json#/definitions/MaterialTest"
+          "$ref": "https://schemas.s1seven.com/e-coc-schemas/v1.0.0/material-certification.json#/definitions/MaterialTest"
         },
         "ChemicalAnalysis": {
-          "$ref": "https://schemas.en10204.io/e-coc-schemas/v1.0.0/chemical-analysis.json#/definitions/ChemicalAnalysis"
+          "$ref": "https://schemas.s1seven.com/e-coc-schemas/v1.0.0/chemical-analysis.json#/definitions/ChemicalAnalysis"
         }
       },
       "required": []
@@ -460,24 +391,14 @@
         "Name": {
           "type": "string",
           "description": "Name of business case reference",
-          "enum": [
-            "OrderNo",
-            "OrderPosition",
-            "DeliveryNote",
-            "OrderDate",
-            "CustomerOrderNo",
-            "DeliveryDate"
-          ]
+          "enum": ["OrderNo", "OrderPosition", "DeliveryNote", "OrderDate", "CustomerOrderNo", "DeliveryDate"]
         },
         "Value": {
           "type": "string",
           "description": "Value of business case reference"
         }
       },
-      "required": [
-        "Name",
-        "Value"
-      ]
+      "required": ["Name", "Value"]
     },
     "NormativeRef": {
       "type": "array",
@@ -505,10 +426,7 @@
             }
           }
         },
-        "required": [
-          "Name",
-          "Value"
-        ]
+        "required": ["Name", "Value"]
       }
     },
     "SnStructure": {
@@ -574,15 +492,7 @@
           "ValueType": {
             "type": "string",
             "description": "ValueType may be used by applications for further processing, validations",
-            "enum": [
-              "Integer",
-              "Float",
-              "Time",
-              "DateRange",
-              "NumberRange",
-              "TimeRange",
-              "String"
-            ]
+            "enum": ["Integer", "Float", "Time", "DateRange", "NumberRange", "TimeRange", "String"]
           }
         },
         "required": []
@@ -605,11 +515,7 @@
       "properties": {
         "Direction": {
           "type": "string",
-          "enum": [
-            "Length",
-            "Width",
-            "Height"
-          ]
+          "enum": ["Length", "Width", "Height"]
         },
         "DimValue": {
           "type": "number"
@@ -661,9 +567,7 @@
               "$ref": "#/definitions/AddProperties"
             }
           },
-          "required": [
-            "StandardReferences"
-          ]
+          "required": ["StandardReferences"]
         },
         "NormativeRef": {
           "$ref": "#/definitions/NormativeRef"
@@ -677,12 +581,7 @@
           }
         }
       },
-      "required": [
-        "EcocType",
-        "Parties",
-        "BusinessRef",
-        "ObjectOfDeclaration"
-      ]
+      "required": ["EcocType", "Parties", "BusinessRef", "ObjectOfDeclaration"]
     }
   }
 }

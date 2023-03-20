@@ -4,14 +4,14 @@
   "description": "E-CoC JSON schema and dependencies developed by S1Seven",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/s1seven/E-CoC-schemas.git"
+    "url": "git+https://github.com/material-identity/E-CoC-schemas.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/s1seven/E-CoC-schemas/issues"
+    "url": "https://github.com/material-identity/E-CoC-schemas/issues"
   },
-  "homepage": "https://github.com/s1seven/E-CoC-schemas#readme",
+  "homepage": "https://github.com/material-identity/E-CoC-schemas#readme",
   "main": "index.js",
   "scripts": {
     "lint": "eslint ./*.js",

@@ -506,7 +506,7 @@
         },
         "Unit": {
           "type": "string",
-          "description": "Abbreviation of Unit according to https://www.doa.la.gov/osp/Vendorcenter/publications/unitofmeasurecodes.pdf"
+          "description": "Abbreviation of Unit according to https://www.doa.la.gov/media/qzrdrzhz/unitofmeasurecodes.pdf"
         }
       }
     },

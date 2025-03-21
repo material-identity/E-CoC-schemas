@@ -1,7 +1,6 @@
-## E-COC-schemas
+**The code and schema definitions from this repository have been migrated to https://github.com/material-identity/schemas.**
 
-[![E-CoC Schema CI](https://github.com/material-identity/E-CoC-schemas/actions/workflows/ci.yml/badge.svg)](https://github.com/material-identity/E-CoC-schemas/actions/workflows/ci.yml)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmaterial-identity%2FE-CoC-schemas.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmaterial-identity%2FE-CoC-schemas?ref=badge_shield)
+## E-COC-schemas
 
 The e-CoC.schema.json is a reimplementation of [e-coc.org schema](https://e-coc.org/schema/v1.0.0/e-coc.json).
 This repository contains translations and templates used for HTML / PDF rendering of E-CoC certificates.
